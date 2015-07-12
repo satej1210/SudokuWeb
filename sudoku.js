@@ -86,7 +86,7 @@ function NakedQuadRow(RowNumber)
                 }
                 if(outerflag==4)
                 {
-                    console.log("naked quad row found at"+RowNumber);
+                    document.getElementById("Log").value+="\nNaked Quad found at Row "+RowNumber;
                     for(var i=0; i<9; i++)
                     {
                         if(i!=store[0] && i!=store[1] && i!=store[2] && i!=store[3])
@@ -97,6 +97,7 @@ function NakedQuadRow(RowNumber)
                             sudoku[RowNumber-1][i].possibilities[Number4-1]=false;
                         }
                     }
+                    return;
                 }
             }
         }
@@ -149,7 +150,7 @@ function NakedQuadColumn(ColumnNumber)
                     }
                     if(outerflag==4)
                     {
-                        console.log("naked quad column found at"+ColumnNumber);
+                        document.getElementById("Log").value+="\nNaked Quad found at column"+ColumnNumber;
                         for(var i=0; i<9; i++)
                         {
                             if(i!=store[0] && i!=store[1] && i!=store[2] && i!=store[3])
@@ -160,6 +161,7 @@ function NakedQuadColumn(ColumnNumber)
                                 sudoku[i][ColumnNumber-1].possibilities[Number4-1]=false;
                             }
                         }
+                        return;
                     }
                 }
             }
@@ -208,7 +210,7 @@ function NakedTripleRow(RowNumber)
                 }
                 if(outerflag==3)
                 {
-                    console.log("naked triple row found at "+RowNumber);
+                    document.getElementById("Log").value+="\nNaked Triple found at row"+RowNumber;
                     for(var i=0; i<9; i++)
                     {
                         if(i!=store[0] && i!=store[1] && i!=store[2])
@@ -266,7 +268,7 @@ function NakedTripleColumn(ColumnNumber)
                 }
                 if(outerflag==3)
                 {
-                    console.log("nnaked triple column found at"+ColumnNumber);
+                    document.getElementById("Log").value+="\nNnaked Triple found at column "+ColumnNumber;
                     
                     for(var i=0; i<9; i++)
                     {
@@ -315,7 +317,7 @@ function NakedPairRow(RowNumber)
             }
             if(outerflag==2)
             {
-                console.log("naked pair row found at"+RowNumber);
+                document.getElementById("Log").value+="\nNaked Pair found at row "+RowNumber;
                 for(var i=0; i<9; i++)
                 {
                     if(i!=store[0] && i!=store[1])
@@ -360,7 +362,7 @@ function NakedPairColumn(ColumnNumber)
             }
             if(outerflag==2)
             {
-                console.log("naked pair column found at"+ColumnNumber);
+                document.getElementById("Log").value+="\nNaked Pair found at column "+ColumnNumber;
                 for(var i=0; i<9; i++)
                 {
                     if(i!=store[0] && i!=store[1])
@@ -410,7 +412,7 @@ function NakedPairBox(RowNumber, ColumnNumber)
             }
             if(outerflag==2)
             {
-                console.log("naked pair box found at box indexes "+RowNumber+" "+ColumnNumber);
+                document.getElementById("Log").value+="\nNaked Pair found at box indices "+RowNumber+" "+ColumnNumber;
                 var newindex = 0;
                 for(var i=RowNumber; i<RowNumber+3; i++)
                 {
@@ -760,7 +762,7 @@ function CheckAllSingles()
             }
             if(flag==0)             //if it is a single, change the state and check the row, column and boxes off.
             {
-                console.log("\nsingle found at position "+i+" "+j);
+                document.getElementById("Log").value+="\nSingle Found at position "+i+" "+j;
                 sudoku[i][j].ChangeState(store+1);
                 
             }
@@ -903,7 +905,7 @@ function BoxHiddenSingles(x, y)
             }
         }
         if (flag==1) {
-            console.log("box hidden single found in box indexes "+x+" "+y);
+           document.getElementById("Log").value+="\nBox Hidden Single found in box indices "+x+" "+y;
             //cout + ".." + h + ".. " + k + " >> " + "Single\n\n";
             sudoku[l][h].ChangeState(k);
             CheckAll();
@@ -929,7 +931,7 @@ function RowHiddenSingles(i)
 
         if (flag==1)
         {
-            console.log("row hidden single found in row"+i);
+            document.getElementById("Log").value+="\nRow hidden single found in row "+i;
             sudoku[i][no].ChangeState(j);
             CheckAll();
         }
@@ -958,7 +960,7 @@ function ColumnHiddenSingles(i)
         }
         if (flag==1)
         {
-            console.log("column hidden single found in column "+i);
+            document.getElementById("Log").value+="\nColumn Hidden Single found in column "+i;
             sudoku[no][i].ChangeState(j);
             CheckAll();
         }
@@ -994,6 +996,7 @@ function PuzzleCompleted()
                 return false;
         }
     }
+    document.getElementById("Log").value+="\nPuzzle Completed! :)";
     return true;
 }
 function resetPuzzle()
@@ -1077,7 +1080,7 @@ function Everything()
         function doSomething(e) {
         if (e.target !== e.currentTarget) {
             var clickedItem = e.target.id;
-            console.log("Hello " + clickedItem);
+            
             if(clickedItem.length==4)
             {
                 var row, col, poss;
