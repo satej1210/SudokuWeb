@@ -1136,5 +1136,17 @@ function Everything()
                 
                     g[k].removeAttribute('readonly');
             }
+function EnableEditPos(ss)
+                {
+       
+                if(ss.checked==true)setNoReadOnly();
+                else setReadonly();
+        
+                }
+                function NoPos(sss)
+                {
+                    if(ss.checked==true)DrawGridOnly();
+                    else DrawGrid();
+                }
         setReadonly();
         addListeners();
