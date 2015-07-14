@@ -1,3 +1,4 @@
+var Steps = [];
 function Cell(state) {
     //"use strict";
     this.state = state;
@@ -6,16 +7,38 @@ function Cell(state) {
     this.GetState = function () {
         return this.state;
     }
+    this.ChangePossibility=function (Pos, toState, Row, Col)
+    {
+        var id = "n" + Row.toString() + Col.toString() + Pos.toString();
+        var cid = 
+        var box = document.getElementById(id);
+        if(box!=null){
+            //console.log(id);
+            if(toState&&!this.possibilities[Pos])
+            {
+                box.style.backgroundColor="Green";
+            }
+            else if(this.possibilities[Pos]&&!toState){
+                box.style.backgroundColor="Red";
+                   
+            }
+        
+        
+    }
+        this.possibilities[Pos]=toState;
+    }
     this.ChangeState = function (x) {
         "use strict";
         var i;
         this.state = x;
         this.is_filled = true;
         for (i = 0; i < 9; i = i + 1) {
-            this.possibilities[i] = false;
+            this.possibilities[i]=( false);
         }
 
     }
+    
+        
 }
 
 var sudoku = [[new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
@@ -31,13 +54,14 @@ var sudoku = [[new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), 
 //#define cf2(name) for(int i=0; i<9; i+=3) for(int j=0; j<9; j+=3) name(i,j);
 function NakedAll()
 {
+    var stop;
         for(var i=1; i<=9; i++){NakedPairRow(i);}
         for(var i=1; i<=9; i++){NakedPairColumn(i);}
         for(var i=0; i<9; i+=3) for(var j=0; j<9; j+=3) NakedPairBox(i,j);
         
         for(var i=1; i<=9; i++){NakedTripleRow(i);}
         for(var i=1; i<=9; i++){NakedTripleColumn(i);}
-        for(var i=1; i<=9; i++){NakedQuadRow(i);}
+        for(var i=1; i<=9; i++){NakedQuadRow(i)}
         for(var i=1; i<=9; i++){NakedQuadColumn(i);}
     }
 function NakedQuadRow(RowNumber)
@@ -87,17 +111,18 @@ function NakedQuadRow(RowNumber)
                 if(outerflag==4)
                 {
                     document.getElementById("Log").value+="\nNaked Quad found at Row "+RowNumber;
+                    Steps.push("NakedQuadRow(" + RowNumber + ");");
                     for(var i=0; i<9; i++)
                     {
                         if(i!=store[0] && i!=store[1] && i!=store[2] && i!=store[3])
                         {
-                            sudoku[RowNumber-1][i].possibilities[Number1-1]=false;
-                            sudoku[RowNumber-1][i].possibilities[Number2-1]=false;
-                            sudoku[RowNumber-1][i].possibilities[Number3-1]=false;
-                            sudoku[RowNumber-1][i].possibilities[Number4-1]=false;
+                            sudoku[RowNumber-1][i].ChangePossibility(Number1-1,false, RowNumber-1, i);
+                            sudoku[RowNumber-1][i].ChangePossibility(Number2-1, false, RowNumber-1, i);
+                            sudoku[RowNumber-1][i].ChangePossibility(Number3-1, false, RowNumber-1, i);
+                            sudoku[RowNumber-1][i].ChangePossibility(Number4-1, false, RowNumber-1, i);
                         }
                     }
-                    return;
+                    
                 }
             }
         }
@@ -151,14 +176,15 @@ function NakedQuadColumn(ColumnNumber)
                     if(outerflag==4)
                     {
                         document.getElementById("Log").value+="\nNaked Quad found at column"+ColumnNumber;
+                        Steps.push("NakedQuadColumn(" + ColumnNumber + ");");
                         for(var i=0; i<9; i++)
                         {
                             if(i!=store[0] && i!=store[1] && i!=store[2] && i!=store[3])
                             {
-                                sudoku[i][ColumnNumber-1].possibilities[Number1-1]=false;
-                                sudoku[i][ColumnNumber-1].possibilities[Number2-1]=false;
-                                sudoku[i][ColumnNumber-1].possibilities[Number3-1]=false;
-                                sudoku[i][ColumnNumber-1].possibilities[Number4-1]=false;
+                                sudoku[i][ColumnNumber-1].ChangePossibility(Number1-1,false, i, ColumnNumber-1);
+                            sudoku[i][ColumnNumber-1].ChangePossibility(Number2-1, false, i, ColumnNumber-1);
+                            sudoku[i][ColumnNumber-1].ChangePossibility(Number3-1, false, i, ColumnNumber-1);
+                            sudoku[i][ColumnNumber-1].ChangePossibility(Number4-1, false, i, ColumnNumber-1);
                             }
                         }
                         return;
@@ -211,13 +237,15 @@ function NakedTripleRow(RowNumber)
                 if(outerflag==3)
                 {
                     document.getElementById("Log").value+="\nNaked Triple found at row"+RowNumber;
+                    Steps.push("NakeTripleRow(" + RowNumber + ");");
                     for(var i=0; i<9; i++)
                     {
                         if(i!=store[0] && i!=store[1] && i!=store[2])
                         {
-                            sudoku[RowNumber-1][i].possibilities[Number1-1]=false;
-                            sudoku[RowNumber-1][i].possibilities[Number2-1]=false;
-                            sudoku[RowNumber-1][i].possibilities[Number3-1]=false;
+                            sudoku[RowNumber-1][i].ChangePossibility(Number1-1, false, RowNumber-1, i);
+                            sudoku[RowNumber-1][i].ChangePossibility(Number2-1, false, RowNumber-1, i);
+                            sudoku[RowNumber-1][i].ChangePossibility(Number3-1, false, RowNumber-1, i);
+                            
                         }
                     }
                 }
@@ -269,14 +297,14 @@ function NakedTripleColumn(ColumnNumber)
                 if(outerflag==3)
                 {
                     document.getElementById("Log").value+="\nNnaked Triple found at column "+ColumnNumber;
-                    
+                    Steps.push("NakeTripleColumn(" + ColumnNumber + ");");
                     for(var i=0; i<9; i++)
                     {
                         if(i!=store[0] && i!=store[1] && i!=store[2])
                         {
-                            sudoku[i][ColumnNumber-1].possibilities[Number1-1]=false;
-                            sudoku[i][ColumnNumber-1].possibilities[Number2-1]=false;
-                            sudoku[i][ColumnNumber-1].possibilities[Number3-1]=false;
+                            sudoku[i][ColumnNumber-1].ChangePossibility(Number1-1,false, i, ColumnNumber-1);
+                            sudoku[i][ColumnNumber-1].ChangePossibility(Number2-1, false, i, ColumnNumber-1);
+                            sudoku[i][ColumnNumber-1].ChangePossibility(Number3-1, false, i, ColumnNumber-1);
                         }
                     }
                 }
@@ -318,12 +346,13 @@ function NakedPairRow(RowNumber)
             if(outerflag==2)
             {
                 document.getElementById("Log").value+="\nNaked Pair found at row "+RowNumber;
+                Steps.push("NakePairRow(" + RowNumber + ");");
                 for(var i=0; i<9; i++)
                 {
                     if(i!=store[0] && i!=store[1])
                     {
-                        sudoku[RowNumber-1][i].possibilities[Number1-1]=false;
-                        sudoku[RowNumber-1][i].possibilities[Number2-1]=false;
+                        sudoku[RowNumber-1][i].ChangePossibility(Number1-1, false, RowNumber-1, i);
+                        sudoku[RowNumber-1][i].ChangePossibility(Number2-1, false, RowNumber-1, i);
                     }
                 }
             }
@@ -363,12 +392,13 @@ function NakedPairColumn(ColumnNumber)
             if(outerflag==2)
             {
                 document.getElementById("Log").value+="\nNaked Pair found at column "+ColumnNumber;
+                Steps.push("NakePairColumn(" + ColumnNumber + ");");
                 for(var i=0; i<9; i++)
                 {
                     if(i!=store[0] && i!=store[1])
                     {
-                        sudoku[i][ColumnNumber-1].possibilities[Number1-1]=false;
-                        sudoku[i][ColumnNumber-1].possibilities[Number2-1]=false;
+                        sudoku[i][ColumnNumber-1].ChangePossibility(Number1-1,false, i, ColumnNumber-1);
+                        sudoku[i][ColumnNumber-1].ChangePossibility(Number2-1, false, i, ColumnNumber-1);
                     }
                 }
             }
@@ -424,8 +454,8 @@ function NakedPairBox(RowNumber, ColumnNumber)
                         }
                         else
                         {
-                            sudoku[i][j].possibilities[Number1-1]=false;
-                            sudoku[i][j].possibilities[Number2-1]=false;
+                            sudoku[i][j].ChangePossibility(Number1-1,false, i, j);
+                        sudoku[i][j].ChangePossibility(Number2-1, false, i,j);
                         }
                     }
                 }
@@ -445,7 +475,7 @@ function LC_f11(i,j)   //row in box
                     for(var b=0; b<9; b++)
                     {
                         if(b<j||b>=j+3)
-                            sudoku[i][b].possibilities[x-1]=false;
+                            sudoku[i][b].ChangePossibility(x-1,false,i,b);
                     }
                 }
 
@@ -455,7 +485,7 @@ function LC_f11(i,j)   //row in box
                     for(var b=0; b<9; b++)
                     {
                         if(b<j||b>=j+3)
-                            sudoku[i+1][b].possibilities[x-1]=false;
+                            sudoku[i+1][b].ChangePossibility(x-1, false, i+1, b);
                     }
                     
                 }
@@ -465,7 +495,7 @@ function LC_f11(i,j)   //row in box
                     for(var b=0; b<9; b++)
                     {
                         if(b<j||b>=j+3)
-                            sudoku[i+2][b].possibilities[x-1]=false;
+                            sudoku[i+2][b].ChangePossibility(x-1, false, i+2, b);
                     }
                     
                 }
@@ -487,7 +517,7 @@ function LC_f12(i, j) //column in box
                     for(var b=0; b<9; b++)
                     {
                         if(b<i||b>=i+3)
-                            sudoku[b][j].possibilities[x-1]=false;
+                            sudoku[b][j].ChangePossibility(x-1, false, b, j);
                     }
                     
                 }
@@ -498,7 +528,7 @@ function LC_f12(i, j) //column in box
                     for(var b=0; b<9; b++)
                     {
                         if(b<i||b>=i+3)
-                            sudoku[b][j+1].possibilities[x-1]=false;
+                            sudoku[b][j+1].ChangePossibility(x-1, false, b, j+1);
                     }
                 }
             if(GetNumberArray[2]||GetNumberArray[5]||GetNumberArray[8])
@@ -507,7 +537,7 @@ function LC_f12(i, j) //column in box
                     for(var b=0; b<9; b++)
                     {
                         if(b<i||b>=i+3)
-                            sudoku[b][j+2].possibilities[x-1]=false;
+                            sudoku[b][j+2].ChangePossibility(x-1, false, b, j+2);
                     }
                 }
 
@@ -547,7 +577,7 @@ function LC_f21(i) //row
                         for(var b=left_col_num; b<left_col_num+3; b++)
                         {
                             if(a!=i)
-                                sudoku[a][b].possibilities[x-1]=false;
+                                sudoku[a][b].ChangePossibility(x-1, false, a, b);
                         }
                         
                     }
@@ -564,7 +594,7 @@ function LC_f21(i) //row
                         for(var b=left_col_num; b<left_col_num+3; b++)
                         {
                             if(a!=i)
-                                sudoku[a][b].possibilities[x-1]=false;
+                                sudoku[a][b].ChangePossibility(x-1, false, a, b);
                         }
                         
                     }
@@ -581,7 +611,7 @@ function LC_f21(i) //row
                         for(var b=left_col_num; b<left_col_num+3; b++)
                         {
                             if(a!=i)
-                                sudoku[a][b].possibilities[x-1]=false;
+                                sudoku[a][b].ChangePossibility(x-1, false, a, b);
                         }
                         
                     }
@@ -609,7 +639,7 @@ function LC_f22(i) //column
                         for(var b=left_col_num; b<left_col_num+3; b++)
                         {
                             if(b!=i)
-                                sudoku[a][b].possibilities[x-1]=false;
+                                sudoku[a][b].ChangePossibility(x-1, false, a, b);
                         }
                         
                     }
@@ -626,7 +656,7 @@ function LC_f22(i) //column
                         for(var b=left_col_num; b<left_col_num+3; b++)
                         {
                             if(b!=i)
-                                sudoku[a][b].possibilities[x-1]=false;
+                                sudoku[a][b].ChangePossibility(x-1, false, a, b);
                         }
                         
                     }
@@ -643,7 +673,7 @@ function LC_f22(i) //column
                         for(var b=left_col_num; b<left_col_num+3; b++)
                         {
                             if(b!=i)
-                                sudoku[a][b].possibilities[x-1]=false;
+                                sudoku[a][b].ChangePossibility(x-1, false, a, b);
                         }
                         
                     }
@@ -780,7 +810,7 @@ function CheckBox(FilledX, FilledY)
         {
             for(var j=b; j<=b+2; j++)
             {
-                sudoku[i][j].possibilities[sudoku[FilledX][FilledY].GetState()-1] = false;
+                sudoku[i][j].ChangePossibility(sudoku[FilledX][FilledY].GetState()-1, false, i, j);
             }
         }
     }
@@ -794,7 +824,7 @@ function CheckColumn(c)
             if(sudoku[j-1][c-1].GetState()==i)
             {
                 for(var k=0; k<9; k++)
-                    sudoku[k][c-1].possibilities[i-1]=false;
+                    sudoku[k][c-1].ChangePossibility(i-1, false, k, c-1);
                 break;
             }
         }
@@ -811,7 +841,7 @@ function CheckRow(r)
             if(sudoku[r-1][j-1].GetState()==i)
             {
                 for(k=0; k<9; k++)
-                    sudoku[r-1][k].possibilities[i-1]=false;
+                    sudoku[r-1][k].ChangePossibility(i-1, false, r-1, k);
                 break;
             }
         }

@@ -1528,7 +1528,7 @@
                     </table>
                 </td>
                 <td id = "c87">
-                    <table id = "notes">
+                    <table id = "notes" cellspacing="0" cellpadding="0">
                         <tr>
                             <td id = "cell"><input class="notFull" id = "n870" value="" maxlength="1" size="1"></td>
                             <td id = "cell"><input class="notFull" id = "n871" value="" maxlength="1" size="1"></td>
@@ -1547,7 +1547,7 @@
                     </table>
                 </td>
                 <td id = "c88">
-                    <table id = "notes">
+                    <table id = "notes" cellspacing="0" cellpadding="0">
                         <tr>
                             <td id = "cell"><input class="notFull" id = "n880" value="" maxlength="1" size="1"></td>
                             <td id = "cell"><input class="notFull" id = "n881" value="" maxlength="1" size="1"></td>
@@ -1569,7 +1569,9 @@
         </table>
     </div>
     <div id="right">
-        <div style="height: 10px;"><script src = "sudoku.js"></script>
+        <div style="height: 10px;">
+        <script src = "http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src = "sudoku.js"></script>
         <button onclick="DrawGrid();removeListeners();addListeners();">Draw Grid With Possibilities</button><br>
         <textarea id = "FromUser" cols="9" rows="9"></textarea><br>
         <button onclick="GetPuz();DrawGrid();removeListeners();addListeners();">Get Puzzle</button><br>
@@ -1578,7 +1580,7 @@
         <button onclick="CheckAllSingles();CheckAll();DrawGrid();removeListeners();addListeners();">All Singles Check</button><br>
         <button onclick="LC();CheckAll();DrawGrid();removeListeners();addListeners();">Locked Candidate I</button><br>
         <button onclick="LC2();CheckAll();DrawGrid();removeListeners();addListeners();">Locked Candidate II</button><br>
-        <button onclick="NakedAll();CheckAll();DrawGrid();removeListeners();addListeners();">Naked All</button><br>
+        <button onclick="NakedAll();removeListeners();addListeners();">Naked All</button><br>
         <br><button onclick="Everything();removeListeners();addListeners();">Solve</button><br>
         <button onclick="DrawGridOnly(); removeListeners();addListeners();" disabled=true>Draw Grid Only</button>
           <div id="check">  <input type="checkbox" onclick="EnableEditPos(this)">Enable Possibilities Editing</input>
