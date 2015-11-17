@@ -101,10 +101,20 @@ input {
 #notes {
     border: 0px;
 }
-
+#StepCNT
+{
+    font-size: 10px;
+}
 #cell {
     border: 0px solid black;
     font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    -webkit-transition: background 500ms ease;
+-moz-transition: background 500ms ease;
+-ms-transition: background 500ms ease;
+-o-transition: background 500ms ease;
+transition: background 500ms ease;
 }
 
 #c00 {
@@ -112,6 +122,9 @@ input {
     border-left: 3px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c01,
@@ -123,6 +136,9 @@ input {
     border-left: 0px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c31,
@@ -138,7 +154,11 @@ input {
     border-left: 0px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
+
 
 #c05,
 #c02,
@@ -147,6 +167,9 @@ input {
     border-left: 0px solid black;
     border-right: 3px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c10,
@@ -160,6 +183,9 @@ input {
     border-left: 3px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c13,
@@ -172,6 +198,9 @@ input {
     border-left: 0px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c18,
@@ -185,6 +214,9 @@ input {
     border-left: 0px solid black;
     border-right: 3px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c20,
@@ -193,6 +225,9 @@ input {
     border-left: 3px solid black;
     border-right: 1px solid black;
     border-bottom: 3px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c28,
@@ -205,6 +240,9 @@ input {
     border-left: 0px solid black;
     border-right: 3px solid black;
     border-bottom: 3px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c21,
@@ -224,6 +262,9 @@ input {
     border-left: 0px solid black;
     border-right: 1px solid black;
     border-bottom: 3px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c12,
@@ -242,6 +283,9 @@ input {
     border-left: 0px solid black;
     border-right: 3px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c11,
@@ -258,13 +302,18 @@ input {
     border-left: 0px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c80 {
     border-top: 0px solid black;
     border-left: 3px solid black;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid black;font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c81,
@@ -273,7 +322,9 @@ input {
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid black;font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c83,
@@ -281,7 +332,9 @@ input {
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid black;font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 #c82,
@@ -290,7 +343,9 @@ input {
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-right: 3px solid black;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid black;font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
 }
 
 .full {

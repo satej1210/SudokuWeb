@@ -3,11 +3,13 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.sudoku.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300, 500' rel='stylesheet' type='text/css'>
     </head>
     <body>
    <div class="pure-g container">
     <div class="pure-u-1-2">
      <script>var Table=""</script>
+        <div id="TABLEMain">
       <table id = "Main">
     
             <tr>
@@ -1569,13 +1571,16 @@
                 </td>
             </tr>
         </table>
+       </div>
     </div>
     <div class="pure-u-1-2">
         <div style="height: 10px;">
         <script src = "http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src = "sudoku.js"></script>
         <button onclick="DrawGrid();removeListeners();addListeners();">Draw Grid With Possibilities</button><br>
-        <textarea id = "FromUser" cols="9" rows="9"></textarea><br>
+        <textarea id = "FromUser" cols="9" rows="9" style="font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;"></textarea><br>
         <button onclick="GetPuz();DrawGrid();removeListeners();addListeners();">Get Puzzle</button><br>
         <button onclick="CheckAll();DrawGrid();removeListeners();addListeners();">Check All</button><br>
         <button onclick="AllHiddenSingles();CheckAll();DrawGrid();removeListeners();addListeners();">All Hidden Singles</button><br>
@@ -1587,6 +1592,7 @@
         <button onclick="DrawGridOnly(); removeListeners();addListeners();" disabled=true>Draw Grid Only</button>
           <div id="check">  <input type="checkbox" onclick="EnableEditPos(this)">Enable Possibilities Editing</input>
           <br><textarea id = "Log" cols="50" rows="10"></textarea><br>
+            <button class="stepButton" id="prevS" onclick="PrevStep()">&larr;&nbsp;Prev</button> <span id="StepCNT">Step 0 of 0&#40;Press Solve to see steps&#41;</span> <button class="stepButton" id="nextS" onclick="NextStep();">Next&nbsp;&rarr;</button>
         </div>
         </div>
     </div>
