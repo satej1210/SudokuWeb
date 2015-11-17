@@ -6,13 +6,13 @@ function Cell(state) {
     this.possibilities = [true, true, true, true, true, true, true, true, true];
     this.GetState = function () {
         return this.state;
-    }
-    this.ChangePossibility=function (Pos, toState, Row, Col)
-    {
+    };
+    this.ChangePossibility = function (Pos, toState, Row, Col) {
+        
         var id = "n" + Row.toString() + Col.toString() + Pos.toString();
-        var cid = 
         var box = document.getElementById(id);
         if(box!=null){
+            box.style.backgroundColor="White";
             //console.log(id);
             if(toState&&!this.possibilities[Pos])
             {
@@ -33,7 +33,7 @@ function Cell(state) {
         this.state = x;
         this.is_filled = true;
         for (i = 0; i < 9; i = i + 1) {
-            this.possibilities[i]=( false);
+            this.possibilities[i]=false;
         }
 
     }
@@ -1074,6 +1074,12 @@ function sleep(milliseconds) {
     }
   }
 }
+function executeAsynchronously(functions, timeout) {
+  for(var i = 0; i < functions.length; i++) {
+    setTimeout(functions[i], timeout);
+  }
+}
+
 function Everything()
 {
     //DrawGrid();
@@ -1084,6 +1090,7 @@ function Everything()
     //DrawGrid();
     for(var i=0; !PuzzleCompleted(); i++)
     {
+        
         AllHiddenSingles();
         CheckAll();
         DrawGrid();
@@ -1098,7 +1105,6 @@ function Everything()
         DrawGrid();
         NakedAll();
         DrawGrid();
-
         
     }  
     }
