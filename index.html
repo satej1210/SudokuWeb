@@ -4,10 +4,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.sudoku.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300, 500' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.min.js"></script>
     </head>
     <body>
-   <div class="pure-g container">
-    <div class="pure-u-1-2">
+   <div class="container">
+    <div class="left">
      <script>var Table=""</script>
         <div id="TABLEMain">
       <table id = "Main">
@@ -1573,9 +1575,8 @@
         </table>
        </div>
     </div>
-    <div class="pure-u-1-2">
+    <div class="right">
         <div style="height: 10px;">
-        <script src = "http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src = "sudoku.js"></script>
         <button onclick="DrawGrid();removeListeners();addListeners();">Draw Grid With Possibilities</button><br>
         <textarea id = "FromUser" cols="9" rows="9" style="font-size: 12px;

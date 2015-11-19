@@ -23,6 +23,34 @@ text-align: center;
 
 /* HTML5 display-role reset for older browsers */
 
+@media screen and (min-width: 1165px) {
+    .container {
+        width: 100%;
+    }
+    .left {
+        width: 50%;
+        float: left;
+    }
+    .right {
+        width: 50%;
+        float: right;
+    }
+}
+
+@media screen and (max-width: 1165px) {
+    .container {
+        width: 100%;
+    }
+    .left {
+        width: 100%;
+        text-align: center;
+    }
+    .right {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 article,
 aside,
 details,
@@ -93,28 +121,25 @@ td {
 input {
     outline: none;
     border: 0px;
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
     text-align: center;
 }
 
 #notes {
     border: 0px;
 }
-#StepCNT
-{
+
+#StepCNT {
     font-size: 10px;
 }
+
 #cell {
     border: 0px solid black;
     font-size: 12px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    -webkit-transition: background 500ms ease;
--moz-transition: background 500ms ease;
--ms-transition: background 500ms ease;
--o-transition: background 500ms ease;
-transition: background 500ms ease;
+    font-weight:  300;
+    
 }
 
 #c00 {
@@ -124,7 +149,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+ 
 }
 
 #c01,
@@ -138,7 +164,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+ 
 }
 
 #c31,
@@ -156,9 +183,9 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
-}
+    font-weight: 400;
 
+}
 
 #c05,
 #c02,
@@ -169,7 +196,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c10,
@@ -185,7 +213,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c13,
@@ -200,7 +229,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c18,
@@ -216,7 +246,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c20,
@@ -227,7 +258,8 @@ transition: background 500ms ease;
     border-bottom: 3px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c28,
@@ -242,7 +274,8 @@ transition: background 500ms ease;
     border-bottom: 3px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c21,
@@ -264,7 +297,8 @@ transition: background 500ms ease;
     border-bottom: 3px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c12,
@@ -285,7 +319,8 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c11,
@@ -304,16 +339,19 @@ transition: background 500ms ease;
     border-bottom: 1px solid black;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c80 {
     border-top: 0px solid black;
     border-left: 3px solid black;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;font-size: 14px;
+    border-bottom: 3px solid black;
+    font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c81,
@@ -322,9 +360,11 @@ transition: background 500ms ease;
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;font-size: 14px;
+    border-bottom: 3px solid black;
+    font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c83,
@@ -332,9 +372,11 @@ transition: background 500ms ease;
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;font-size: 14px;
+    border-bottom: 3px solid black;
+    font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+
 }
 
 #c82,
@@ -343,9 +385,15 @@ transition: background 500ms ease;
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-right: 3px solid black;
-    border-bottom: 3px solid black;font-size: 14px;
+    border-bottom: 3px solid black;
+    font-size: 14px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;-webkit-transition: background 500ms ease; -moz-transition: background 500ms ease; -ms-transition: background 500ms ease; -o-transition: background 500ms ease; transition: background 500ms ease;
+    font-weight: 400;
+    -webkit-transition: background 500ms ease;
+    -moz-transition: background 500ms ease;
+    -ms-transition: background 500ms ease;
+    -o-transition: background 500ms ease;
+    transition: background 500ms ease;
 }
 
 .full {
@@ -377,5 +425,9 @@ transition: background 500ms ease;
 }
 
 #Main {
-    display: flex;
+    display: block;
+    text-align: center;
+    margin: 0px auto 0px auto;
+    width: 10%;
+    height: 10%;
 }
