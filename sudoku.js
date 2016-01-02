@@ -19,7 +19,10 @@ function Cell(state) {
 
                 box.style.backgroundColor = "Green";
             } else if (this.possibilities[Pos] && !toState) {
-                $(box).animate({backgroundColor: "Red"}, 500);
+                //$(box).animate({backgroundColor: "Red"}, 500);
+                setTimeout(function () {
+                    $(box).animate({backgroundColor: "#FF0000"} , 100);
+                }, 0);
                 
 
             }
@@ -714,7 +717,10 @@ function DrawGridOnly() {
             var id = "c";
             id += i.toString() + j.toString();
             var cell = document.getElementById(id);
-            cell.innerHTML = "<td id=\"cell\"><input id =\"" + id + "9" + "\" class=\"full\" value=\"" + sudoku[i][j].GetState() + "\"maxlength=\"1\" size=\"1\"/></td>";
+            var state;
+            if(sudoku[i][j].GetState()==0) state = "";
+            else state = sudoku[i][j].GetState();
+            cell.innerHTML = "<td id=\"cell\"><input id =\"" + id + "9" + "\" class=\"full\" value=\"" + state + "\"maxlength=\"1\" size=\"1\"/></td>";
 
         }
     }
