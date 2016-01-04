@@ -27,10 +27,14 @@ text-align: center;
     .container {
         width: 100%;
     }
-    .left {width: 60%;
-float: left;}
-    .right {width: 40%;
-float: right;}
+    .left {
+        width: 50%;
+        float: left;
+    }
+    .right {
+        width: 50%;
+        float: right;
+    }
 }
 
 @media screen and (max-width: 1165px) {
@@ -395,7 +399,7 @@ input {
 .full {
     width: 64px;
     height: 64px;
-    font-size: 36px;
+    font-size: 24px;
 }
 
 #notes {
