@@ -710,12 +710,13 @@ function DrawGridOnly() {
     //sudoku[0][2].ChangeState(2);
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
-
-            var id = "c";
+var id = "c";
             id += i.toString() + j.toString();
             var cell = document.getElementById(id);
-            cell.innerHTML = "<td id=\"cell\"><input id =\"" + id + "9" + "\" class=\"full\" value=\"" + sudoku[i][j].GetState() + "\"maxlength=\"1\" size=\"1\"/></td>";
-
+            var state;
+            if(sudoku[i][j].GetState()==0) state = "";
+            else state = sudoku[i][j].GetState();
+            cell.innerHTML = "<td id=\"cell\"><input id =\"" + id + "9" + "\" class=\"full\" value=\"" + state + "\"maxlength=\"1\" size=\"1\"/></td>";
         }
     }
 }
