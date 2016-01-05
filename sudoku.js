@@ -19,14 +19,14 @@ function Cell(state) {
 
                 box.style.backgroundColor = "Green";
             } else if (this.possibilities[Pos] && !toState) {
-                $(box).animate({backgroundColor: "Red"}, 500);
+                $(box).velocity({backgroundColor: "#FF0000"}, 100);
                 
 
             }
            
             setTimeout(function () {
-                $(box).animate({backgroundColor: "White"}, 500);
-            }, 1000);
+                $(box).velocity({backgroundColor: "#FFFFFF"}, 100);
+            }, 750);
 
 
         }
@@ -102,7 +102,8 @@ function PrevStep(x) {
 
             for (var i = 0; i < Step; i++) {
                 eval(Steps[i]);
-                CheckAll();
+                if(i%5==0)
+                    CheckAll();
 
             }
             Step--;
@@ -112,8 +113,36 @@ function PrevStep(x) {
 
     UpdateStepCNT();
 }
+var timeoutHandle = null;
+function callNTimes(func, num, delay) {
+    if (!num) return;
+    func();
+    timeoutHandle = setTimeout(function() { callNTimes(func, num - 1, delay); }, delay);
+}
 
-function NextStep(x) {
+var SSCalled = 0;
+function SlowSolve()
+{
+    if(!SSCalled){
+    Step=0;
+    resetPuzzle();
+    SSCalled = 1;
+    }
+    if(GetPuz()){
+    if(timeoutHandle!=null)
+        clearTimeout(timeoutHandle);
+    //intervalHandle = null;
+        callNTimes(NextStep, Steps.length, 750);
+        SSCalled = 0;
+    }
+    
+}
+function StopSS()
+{
+    if(timeoutHandle!=null)
+        clearTimeout(timeoutHandle);
+}
+function NextStep() {
 
 
     if (Step > 0 && Step < Steps.length) {
@@ -121,7 +150,7 @@ function NextStep(x) {
         eval(Steps[Step]);
         Step++;
         CheckAll();
-       
+       //AllHiddenSingles();
         DrawGrid();
 
     } else if (Step < Steps.length - 1) {
@@ -707,6 +736,8 @@ function LC2() {
 
 function DrawGridOnly() {
     var i, j, m, text = "";
+    resetPuzzle();
+    GetPuz();
     //sudoku[0][2].ChangeState(2);
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
@@ -723,14 +754,14 @@ var id = "c";
 
 function changeBGToGreen(inner) {
     setTimeout(function () {
-        $(inner).animate({backgroundColor: "#22FF33"} , 100);
+        $(inner).velocity({backgroundColor: "#22FF33"} , 200);
     }, 0);
 }
 
 function changeBGToWhite(inner) {
     setTimeout(function () {
-        $(inner).animate({backgroundColor: "White"} , 500);
-    }, 1000);
+        $(inner).velocity({backgroundColor: "#FFFFFF"} , 300);
+    }, 750);
 }
 
 function DrawGrid() {
@@ -1055,7 +1086,7 @@ function PuzzleCompleted() {
     document.getElementById("Log").value += "\nPuzzle Completed! :)";
     var cnt = 0;
     for (var i = 1; i < Steps.length; i++) {
-        if (Steps[i - 1] == Steps[i] &&cnt<2 ) {
+        if (Steps[i - 1] == Steps[i] &&cnt<3 ) {
 
             Steps.splice(i, 1);
             i--;
@@ -1071,6 +1102,7 @@ function PuzzleCompleted() {
 }
 
 function resetPuzzle() {
+    sudoku=[];
     sudoku = [[new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
            [new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
            [new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
@@ -2646,11 +2678,12 @@ function resetPuzzle() {
 }
 
 function GetPuz() {
+    resetPuzzle();
     var Puz = document.getElementById("FromUser").value;
     var CleanPuz = "";
     if (Puz.length != 89) {
         document.getElementById("FromUser").value = "Enter Correct Puzzle";
-        //resetPuzzle();
+        resetPuzzle();
         //DrawGrid();
         return false;
     }
@@ -2685,11 +2718,12 @@ function executeAsynchronously(functions, timeout) {
 
 function Everything() {
     //DrawGrid();
+    resetPuzzle();
     if (GetPuz()) {
         CheckAll();
         var p=0;
         //DrawGrid();
-        for (var i = 0; p<10; i++, p++) {
+        for (var i = 0; p<100; i++, p++) {
 
             AllHiddenSingles();
             CheckAll();

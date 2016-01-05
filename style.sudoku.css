@@ -22,7 +22,13 @@ text-align: center;
 
 
 /* HTML5 display-role reset for older browsers */
-
+input {
+    outline: none;
+    border: 0px;
+    width: 21px;
+    height: 21px;
+    text-align: center;
+    }
 @media screen and (min-width: 1165px) {
     .container {
         width: 100%;
@@ -35,6 +41,22 @@ text-align: center;
         width: 40%;
         float: right;
     }
+    
+    .full {
+    width: 68px;
+    height: 68px;
+    font-size: 36px;
+    }
+    .notFull
+    {
+        outline: none;
+    border: 0px;
+        width: 22px;
+    height: 22px;
+        font-size: 12px;
+        text-align: center;
+    }
+    
 }
 
 @media screen and (max-width: 1165px) {
@@ -49,6 +71,23 @@ text-align: center;
         width: 100%;
         text-align: center;
     }
+    .full {
+    width: 38px;
+    height: 38px;
+    font-size: 23px;
+        text-align: center;
+    }
+    .notFull
+    {
+        outline: none;
+    border: 0px;
+        width: 12px;
+    height: 12px;
+        font-size: 8.5px;
+        text-align: center;
+    }
+    
+    
 }
 
 article,
@@ -118,13 +157,13 @@ td {
     /*Every third*/
 }
 
-input {
+/*input {
     outline: none;
     border: 0px;
     width: 21px;
     height: 21px;
     text-align: center;
-}
+}*/
 
 #notes {
     border: 0px;
@@ -396,11 +435,7 @@ input {
     transition: background 500ms ease;
 }
 
-.full {
-    width: 64px;
-    height: 64px;
-    font-size: 36px;
-}
+
 
 #notes {
     border-collapse: collapse;
