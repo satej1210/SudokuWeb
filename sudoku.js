@@ -876,14 +876,14 @@ function CheckBox(FilledX, FilledY) {
         //if(Step==0)Steps.push("CheckBox(" +  FilledX + ", " + FilledY + ");");;
         for (var i = a; i <= a + 2; i++) {
             for (var j = b; j <= b + 2; j++) {
-<<<<<<< HEAD
-                if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
-                        {
-                            Steps.push("CheckRow(" +  FilledX + ", " + FilledY + ");");
-                        }
-=======
 
->>>>>>> parent of 6400c62... Stashing...
+                //if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
+                        {
+                            //Steps.push("CheckRow(" +  FilledX + ", " + FilledY + ");");
+                        }
+
+
+
                 sudoku[i][j].ChangePossibility(sudoku[FilledX][FilledY].GetState() - 1, false, i, j);
             }
         }
@@ -896,13 +896,12 @@ function CheckColumn(c) {
             if (sudoku[j - 1][c - 1].GetState() == i) {
                 //if(Step==0)Steps.push("CheckColumn(" +  c + ");");;
                 for (var k = 0; k < 9; k++) {
-<<<<<<< HEAD
-                    if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
+
+                    //if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
                         {
-                            Steps.push("CheckColumn(" +  c + ");");
+                            //Steps.push("CheckColumn(" +  c + ");");
                         }
-=======
->>>>>>> parent of 6400c62... Stashing...
+
                     sudoku[k][c - 1].ChangePossibility(i - 1, false, k, c - 1);
                     //
                 }
@@ -920,13 +919,12 @@ function CheckRow(r) {
             if (sudoku[r - 1][j - 1].GetState() == i) {
                 //if(Step==0)Steps.push("CheckRow(" +  r + ");");;
                 for (k = 0; k < 9; k++) {
-<<<<<<< HEAD
-                    if(Step==0 && (sudoku[r-1][k].possibilities[i-1] && false))
+
+                   // if(Step==0 && (sudoku[r-1][k].possibilities[i-1] && false))
                         {
-                            Steps.push("CheckRow(" +  r + ");");
+                         //   Steps.push("CheckRow(" +  r + ");");
                         }
-=======
->>>>>>> parent of 6400c62... Stashing...
+
                     sudoku[r - 1][k].ChangePossibility(i - 1, false, r - 1, k);
                     //Steps.push("CheckRow(" +  r + ");");
                 }
@@ -1093,13 +1091,10 @@ function AllHiddenSingles() {
             BoxHiddenSingles(i, j);
         }
     }
-<<<<<<< HEAD
+
     if (Step == 0);
     //Steps.push("AllHiddenSingles()");
-=======
-    if(Step==0);
-        //Steps.push("AllHiddenSingles()");
->>>>>>> parent of 6400c62... Stashing...
+
 }
 
 function PuzzleCompleted() {
@@ -1112,21 +1107,17 @@ function PuzzleCompleted() {
     document.getElementById("Log").value += "\nPuzzle Completed! :)";
     var cnt = 0;
     for (var i = 1; i < Steps.length; i++) {
-<<<<<<< HEAD
+
         if (Steps[i - 1] == Steps[i] && cnt < 1) {
-=======
-        if (Steps[i - 1] == Steps[i] &&cnt<3 ) {
->>>>>>> parent of 6400c62... Stashing...
+
 
             Steps.splice(i, 1);
             i--;
             cnt++;
         } else {
-<<<<<<< HEAD
-            cnt = 0;
-=======
+
             cnt=0;
->>>>>>> parent of 6400c62... Stashing...
+
         }
     }
     Steps.push("AllHiddenSingles();AllHiddenSingles();");
