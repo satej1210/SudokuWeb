@@ -19,21 +19,17 @@ function Cell(state) {
 
                 box.style.backgroundColor = "Green";
             } else if (this.possibilities[Pos] && !toState) {
-                $(box).velocity({
-                    backgroundColor: "#FF0000"
-                }, 100);
-
+                $(box).velocity({backgroundColor: "#FF0000"}, 100);
+                
 
             }
-
+           
             setTimeout(function () {
-                $(box).velocity({
-                    backgroundColor: "#FFFFFF"
-                }, 100);
+                $(box).velocity({backgroundColor: "#FFFFFF"}, 100);
             }, 750);
 
 
-        };
+        }
         this.possibilities[Pos] = toState;
     }
     this.ChangeState = function (x) {
@@ -106,7 +102,7 @@ function PrevStep(x) {
 
             for (var i = 0; i < Step; i++) {
                 eval(Steps[i]);
-                if (i % 5 == 0)
+                if(i%5==0)
                     CheckAll();
 
             }
@@ -118,47 +114,43 @@ function PrevStep(x) {
     UpdateStepCNT();
 }
 var timeoutHandle = null;
-
 function callNTimes(func, num, delay) {
     if (!num) return;
     func();
-    timeoutHandle = setTimeout(function () {
-        callNTimes(func, num - 1, delay);
-    }, delay);
+    timeoutHandle = setTimeout(function() { callNTimes(func, num - 1, delay); }, delay);
 }
 
 var SSCalled = 0;
-
-function SlowSolve() {
-    if (!SSCalled) {
-        Step = 0;
-        resetPuzzle();
-        SSCalled = 1;
+function SlowSolve()
+{
+    if(!SSCalled){
+    Step=0;
+    resetPuzzle();
+    SSCalled = 1;
     }
-    if (GetPuz()) {
-        if (timeoutHandle != null)
-            clearTimeout(timeoutHandle);
-        //intervalHandle = null;
+    if(GetPuz()){
+    if(timeoutHandle!=null)
+        clearTimeout(timeoutHandle);
+    //intervalHandle = null;
         callNTimes(NextStep, Steps.length, 750);
         SSCalled = 0;
     }
-
+    
 }
-
-function StopSS() {
-    if (timeoutHandle != null)
+function StopSS()
+{
+    if(timeoutHandle!=null)
         clearTimeout(timeoutHandle);
 }
-
 function NextStep() {
 
 
     if (Step > 0 && Step < Steps.length) {
-        document.getElementById("Log").value += "\n---Step " + Step + "---";
+         document.getElementById("Log").value+="\n---Step "+Step+"---";
         eval(Steps[Step]);
         Step++;
-        //CheckAll();
-        //AllHiddenSingles();
+        CheckAll();
+       //AllHiddenSingles();
         DrawGrid();
 
     } else if (Step < Steps.length - 1) {
@@ -207,25 +199,16 @@ function NakedQuadRow(RowNumber) {
                         }
                     }
                     if (outerflag == 4) {
-
-
+                        document.getElementById("Log").value += "\nNaked Quad found at Row " + RowNumber;
+                        if (Step == 0) {
+                            Steps.push("NakedQuadRow(" + RowNumber + ");");
+                        }
                         for (var i = 0; i < 9; i++) {
                             if (i != store[0] && i != store[1] && i != store[2] && i != store[3]) {
-                                if (sudoku[RowNumber - 1][i].possibilities[Number1 - 1] && false ||
-                                    sudoku[RowNumber - 1][i].possibilities[Number2 - 1] && false ||
-                                    sudoku[RowNumber - 1][i].possibilities[Number3 - 1] && false ||
-                                    sudoku[RowNumber - 1][i].possibilities[Number4 - 1] && false
-                                ) {
-                                    if (Step == 0) {
-                                        document.getElementById("Log").value += "\nNaked Quad found at Row " + RowNumber;
-                                        Steps.push("NakedQuadRow(" + RowNumber + ");");
-                                    }
-                                }
                                 sudoku[RowNumber - 1][i].ChangePossibility(Number1 - 1, false, RowNumber - 1, i);
                                 sudoku[RowNumber - 1][i].ChangePossibility(Number2 - 1, false, RowNumber - 1, i);
                                 sudoku[RowNumber - 1][i].ChangePossibility(Number3 - 1, false, RowNumber - 1, i);
                                 sudoku[RowNumber - 1][i].ChangePossibility(Number4 - 1, false, RowNumber - 1, i);
-
                             }
                         }
 
@@ -272,20 +255,12 @@ function NakedQuadColumn(ColumnNumber) {
                         }
                     }
                     if (outerflag == 4) {
-
-
+                        document.getElementById("Log").value += "\nNaked Quad found at column" + ColumnNumber;
+                        if (Step == 0) {
+                            Steps.push("NakedQuadColumn(" + ColumnNumber + ");");
+                        }
                         for (var i = 0; i < 9; i++) {
                             if (i != store[0] && i != store[1] && i != store[2] && i != store[3]) {
-                                if (sudoku[i][ColumnNumber - 1].possibilities[Number1 - 1] && false ||
-                                    sudoku[i][ColumnNumber - 1].possibilities[Number2 - 1] && false ||
-                                    sudoku[i][ColumnNumber - 1].possibilities[Number3 - 1] && false ||
-                                    sudoku[i][ColumnNumber - 1].possibilities[Number4 - 1] && false
-                                ) {
-                                    if (Step == 0) {
-                                        document.getElementById("Log").value += "\nNaked Quad found at column" + ColumnNumber;
-                                        Steps.push("NakedQuadColumn(" + ColumnNumber + ");");
-                                    }
-                                }
                                 sudoku[i][ColumnNumber - 1].ChangePossibility(Number1 - 1, false, i, ColumnNumber - 1);
                                 sudoku[i][ColumnNumber - 1].ChangePossibility(Number2 - 1, false, i, ColumnNumber - 1);
                                 sudoku[i][ColumnNumber - 1].ChangePossibility(Number3 - 1, false, i, ColumnNumber - 1);
@@ -333,19 +308,12 @@ function NakedTripleRow(RowNumber) {
                     }
                 }
                 if (outerflag == 3) {
-
-
+                    document.getElementById("Log").value += "\nNaked Triple found at row" + RowNumber;
+                    if (Step == 0) {
+                        Steps.push("NakedTripleRow(" + RowNumber + ");");
+                    }
                     for (var i = 0; i < 9; i++) {
                         if (i != store[0] && i != store[1] && i != store[2]) {
-                            if (sudoku[RowNumber - 1][i].possibilities[Number1 - 1] && false ||
-                                sudoku[RowNumber - 1][i].possibilities[Number2 - 1] && false ||
-                                sudoku[RowNumber - 1][i].possibilities[Number3 - 1] && false
-                            ) {
-                                if (Step == 0) {
-                                    document.getElementById("Log").value += "\nNaked Triple found at row" + RowNumber;
-                                    Steps.push("NakedTripleRow(" + RowNumber + ");");
-                                }
-                            }
                             sudoku[RowNumber - 1][i].ChangePossibility(Number1 - 1, false, RowNumber - 1, i);
                             sudoku[RowNumber - 1][i].ChangePossibility(Number2 - 1, false, RowNumber - 1, i);
                             sudoku[RowNumber - 1][i].ChangePossibility(Number3 - 1, false, RowNumber - 1, i);
@@ -392,23 +360,15 @@ function NakedTripleColumn(ColumnNumber) {
                     }
                 }
                 if (outerflag == 3) {
-
+                    document.getElementById("Log").value += "\nNaked Triple found at column " + ColumnNumber;
+                    if (Step == 0) {
+                        Steps.push("NakedTripleColumn(" + ColumnNumber + ");");
+                    }
                     for (var i = 0; i < 9; i++) {
                         if (i != store[0] && i != store[1] && i != store[2]) {
-                            if (sudoku[i][ColumnNumber - 1].possibilities[Number1 - 1] && false ||
-                                sudoku[i][ColumnNumber - 1].possibilities[Number2 - 1] && false ||
-                                sudoku[i][ColumnNumber - 1].possibilities[Number3 - 1] && false
-                            ) {
-                                if (Step == 0) {
-                                    document.getElementById("Log").value += "\nNaked Triple found at column " + ColumnNumber;
-
-                                    Steps.push("NakedTripleColumn(" + ColumnNumber + ");");
-                                }
-                            }
                             sudoku[i][ColumnNumber - 1].ChangePossibility(Number1 - 1, false, i, ColumnNumber - 1);
                             sudoku[i][ColumnNumber - 1].ChangePossibility(Number2 - 1, false, i, ColumnNumber - 1);
                             sudoku[i][ColumnNumber - 1].ChangePossibility(Number3 - 1, false, i, ColumnNumber - 1);
-
                         }
                     }
                 }
@@ -442,21 +402,14 @@ function NakedPairRow(RowNumber) {
                 }
             }
             if (outerflag == 2) {
-
-
+                document.getElementById("Log").value += "\nNaked Pair found at row " + RowNumber;
+                if (Step == 0) {
+                    Steps.push("NakedPairRow(" + RowNumber + ");");
+                }
                 for (var i = 0; i < 9; i++) {
                     if (i != store[0] && i != store[1]) {
-                        if (sudoku[RowNumber - 1][i].possibilities[Number1 - 1] && false ||
-                            sudoku[RowNumber - 1][i].possibilities[Number2 - 1] && false
-                        ) {
-                            if (Step == 0) {
-                                Steps.push("NakedPairRow(" + RowNumber + ");");
-                                document.getElementById("Log").value += "\nNaked Pair found at row " + RowNumber;
-                            }
-                        }
                         sudoku[RowNumber - 1][i].ChangePossibility(Number1 - 1, false, RowNumber - 1, i);
                         sudoku[RowNumber - 1][i].ChangePossibility(Number2 - 1, false, RowNumber - 1, i);
-
                     }
                 }
             }
@@ -488,21 +441,14 @@ function NakedPairColumn(ColumnNumber) {
                 }
             }
             if (outerflag == 2) {
-
-
+                document.getElementById("Log").value += "\nNaked Pair found at column " + ColumnNumber;
+                if (Step == 0) {
+                    Steps.push("NakedPairColumn(" + ColumnNumber + ");");
+                }
                 for (var i = 0; i < 9; i++) {
                     if (i != store[0] && i != store[1]) {
-                        if (sudoku[i][ColumnNumber - 1].possibilities[Number1 - 1] && false ||
-                            sudoku[i][ColumnNumber - 1].possibilities[Number2 - 1] && false
-                        ) {
-                            if (Step == 0) {
-                                document.getElementById("Log").value += "\nNaked Pair found at column " + ColumnNumber;
-                                Steps.push("NakedPairColumn(" + ColumnNumber + ");");
-                            }
-                        }
                         sudoku[i][ColumnNumber - 1].ChangePossibility(Number1 - 1, false, i, ColumnNumber - 1);
                         sudoku[i][ColumnNumber - 1].ChangePossibility(Number2 - 1, false, i, ColumnNumber - 1);
-
                     }
                 }
             }
@@ -538,28 +484,16 @@ function NakedPairBox(RowNumber, ColumnNumber) {
                 }
             }
             if (outerflag == 2) {
-
+                document.getElementById("Log").value += "\nNaked Pair found at box indices " + RowNumber + " " + ColumnNumber;
                 var newindex = 0;
                 for (var i = RowNumber; i < RowNumber + 3; i++) {
                     for (var j = ColumnNumber; j < ColumnNumber + 3; j++) {
                         if (i == store[newindex] && j == store[newindex + 1]) {
                             newindex += 2;
-                        } 
-                        else {
-                            if (sudoku[i][j].possibilities[Number1 - 1] && false ||
-                                sudoku[i][j].possibilities[Number2 - 1] && false
-                            ) {
-                                if (Step == 0) {
-                                    document.getElementById("Log").value += "\nNaked Pair found at box indices " + RowNumber + " " + ColumnNumber;
-                                    Steps.push("NakedPairColumn(" + RowNumber + "," + ColumnNumber + ");");
-                                }
-
-                            
+                        } else {
+                            sudoku[i][j].ChangePossibility(Number1 - 1, false, i, j);
+                            sudoku[i][j].ChangePossibility(Number2 - 1, false, i, j);
                         }
-                        sudoku[i][j].ChangePossibility(Number1 - 1, false, i, j);
-                        sudoku[i][j].ChangePossibility(Number2 - 1, false, i, j);
-                        }
-
                     }
                 }
             }
@@ -570,7 +504,7 @@ function NakedPairBox(RowNumber, ColumnNumber) {
 
 function LC_f11(i, j) //row in box
 {
-    var GetNumberArray, StepFlag = 0;
+    var GetNumberArray;
     for (var x = 1; x <= 9; x++) {
         GetNumberArray = ReturnBoxPossibilities(x, i, j);
         if (GetNumberArray[0] || GetNumberArray[1] || GetNumberArray[2])
@@ -578,10 +512,7 @@ function LC_f11(i, j) //row in box
                 for (var b = 0; b < 9; b++) {
                     if (b < j || b >= j + 3) {
                         sudoku[i][b].ChangePossibility(x - 1, false, i, b);
-                        if (Step == 0 && (sudoku[i][b].possibilities[x-1] && false)) {
-                            StepFlag = 1;
-                            //Steps.push("LC_f21(" + i + ");");   
-                        }
+
                     }
                 }
             }
@@ -591,10 +522,7 @@ function LC_f11(i, j) //row in box
                 for (var b = 0; b < 9; b++) {
                     if (b < j || b >= j + 3) {
                         sudoku[i + 1][b].ChangePossibility(x - 1, false, i + 1, b);
-                        if (Step == 0 && (sudoku[i+1][b].possibilities[x-1] && false)) {
-                            StepFlag = 1;
-                            //Steps.push("LC_f21(" + i + ");");   
-                        }
+
                     }
                 }
 
@@ -604,10 +532,7 @@ function LC_f11(i, j) //row in box
                 for (var b = 0; b < 9; b++) {
                     if (b < j || b >= j + 3) {
                         sudoku[i + 2][b].ChangePossibility(x - 1, false, i + 2, b);
-                        if (Step == 0 && (sudoku[i+2][b].possibilities[x-1] && false)) {
-                            StepFlag = 1;
-                            //Steps.push("LC_f21(" + i + ");");   
-                        }
+
                     }
                 }
 
@@ -616,16 +541,11 @@ function LC_f11(i, j) //row in box
 
 
     }
-    if (Step == 0 && StepFlag == 1) {
-        //StepFlag=1;
-        Steps.push("LC_f11(" + i + ");");
-    }
 }
 
 function LC_f12(i, j) //column in box
 {
     var GetNumberArray;
-    var StepFlag = 0;
     for (var x = 1; x <= 9; x++) {
         GetNumberArray = ReturnBoxPossibilities(x, i, j);
 
@@ -634,10 +554,7 @@ function LC_f12(i, j) //column in box
                 for (var b = 0; b < 9; b++) {
                     if (b < i || b >= i + 3) {
                         sudoku[b][j].ChangePossibility(x - 1, false, b, j);
-                        if (Step == 0 && (sudoku[b][j].possibilities[x-1] && false)) {
-                            StepFlag = 1;
-                            //Steps.push("LC_f21(" + i + ");");   
-                        }
+
                     }
                 }
 
@@ -648,10 +565,7 @@ function LC_f12(i, j) //column in box
                 for (var b = 0; b < 9; b++) {
                     if (b < i || b >= i + 3) {
                         sudoku[b][j + 1].ChangePossibility(x - 1, false, b, j + 1);
-                        if (Step == 0 && (sudoku[b][j+ 1].possibilities[x-1] && false)) {
-                            StepFlag = 1;
-                            //Steps.push("LC_f21(" + i + ");");   
-                        }
+
                     }
                 }
             }
@@ -660,11 +574,7 @@ function LC_f12(i, j) //column in box
                 for (var b = 0; b < 9; b++) {
                     if (b < i || b >= i + 3) {
                         sudoku[b][j + 2].ChangePossibility(x - 1, false, b, j + 2);
-                        if (Step == 0 && (sudoku[b][j+2].possibilities[x-1] && false)) {
-                            StepFlag = 1;
-                            //Steps.push("LC_f21(" + i + ");");   
-                        }
-                       
+
                     }
                 }
             }
@@ -672,10 +582,7 @@ function LC_f12(i, j) //column in box
 
 
     }
-    if (Step == 0 && StepFlag == 1) {
-        //StepFlag=1;
-        Steps.push("LC_f12(" + i + ");");
-    }
+
 }
 
 function LC() {
@@ -687,13 +594,14 @@ function LC() {
             LC_f12(i, j);
         }
     }
-
+    if (Step == 0) {
+        Steps.push("LC();");
+    }
 }
 
 function LC_f21(i) //row
 {
     var GetNumberArray;
-    var StepFlag = 0;
     for (var x = 1; x <= 9; x++) {
         GetNumberArray = ReturnRowPossibilities(x, i);
 
@@ -705,12 +613,7 @@ function LC_f21(i) //row
                 for (var a = left_row_num; a < left_row_num + 3; a++) {
                     for (var b = left_col_num; b < left_col_num + 3; b++) {
                         if (a != i) {
-                            sudoku[a][b].ChangePossibility(x - 1, false, a, b);
-                            if (Step == 0 && (sudoku[a][b].possibilities[x-1] && false)){
-                                StepFlag = 1;
-                                //Steps.push("LC_f21(" + i + ");");
-                            }
-
+                            sudoku[a][b].ChangePossibility(x - 1, false, a, b); //Steps.push("LC_f21(" + i + ");");
                         }
                     }
 
@@ -726,8 +629,7 @@ function LC_f21(i) //row
                     for (var b = left_col_num; b < left_col_num + 3; b++) {
                         if (a != i) {
                             sudoku[a][b].ChangePossibility(x - 1, false, a, b);
-                            if (Step == 0 && (sudoku[a][b].possibilities[x-1] && false)) {
-                                StepFlag = 1;
+                            if (Step == 0) {
                                 //Steps.push("LC_f21(" + i + ");");   
                             }
                         }
@@ -745,9 +647,8 @@ function LC_f21(i) //row
                     for (var b = left_col_num; b < left_col_num + 3; b++) {
                         if (a != i) {
                             sudoku[a][b].ChangePossibility(x - 1, false, a, b);
-                            if (Step == 0 && (sudoku[a][b].possibilities[x-1] && false)) {
-                                StepFlag = 1;
-                                //Steps.push("LC_f21(" + i + ");");   
+                            if (Step == 0) {
+                                //Steps.push("LC_f21(" + i + ");");
                             }
                         }
                     }
@@ -757,16 +658,12 @@ function LC_f21(i) //row
 
 
     }
-    if (Step == 0 && StepFlag == 1) {
-        //StepFlag=1;
-        Steps.push("LC_f21(" + i + ");");
-    }
 
 }
 
 function LC_f22(i) //column
 {
-    var GetNumberArray, StepFlag = 0;
+    var GetNumberArray;
     for (var x = 1; x <= 9; x++) {
         GetNumberArray = ReturnColPossibilities(x, i);
 
@@ -779,10 +676,7 @@ function LC_f22(i) //column
                     for (var b = left_col_num; b < left_col_num + 3; b++) {
                         if (b != i) {
                             sudoku[a][b].ChangePossibility(x - 1, false, a, b);
-                            if (Step == 0 && (sudoku[a][b].possibilities[x-1] && false)) {
-                                StepFlag = 1;
-                                //Steps.push("LC_f21(" + i + ");");   
-                            }
+
                         }
                     }
 
@@ -798,10 +692,7 @@ function LC_f22(i) //column
                     for (var b = left_col_num; b < left_col_num + 3; b++) {
                         if (b != i) {
                             sudoku[a][b].ChangePossibility(x - 1, false, a, b);
-                            if (Step == 0 && (sudoku[a][b].possibilities[x-1] && false)) {
-                                StepFlag = 1;
-                                //Steps.push("LC_f21(" + i + ");");   
-                            }
+                            //if (Step == 0)
 
                         }
                     }
@@ -818,10 +709,8 @@ function LC_f22(i) //column
                     for (var b = left_col_num; b < left_col_num + 3; b++) {
                         if (b != i) {
                             sudoku[a][b].ChangePossibility(x - 1, false, a, b);
-                            if (Step == 0 && (sudoku[a][b].possibilities[x-1] && false)) {
-                                StepFlag = 1;
-                                //Steps.push("LC_f21(" + i + ");");   
-                            }
+                            
+                            //if (Step == 0)
 
                         }
                     }
@@ -831,10 +720,6 @@ function LC_f22(i) //column
 
 
     }
-    if (Step == 0 && StepFlag == 1) {
-        //StepFlag=1;
-        Steps.push("LC_f22(" + i + ");");
-    }
 
 }
 
@@ -842,6 +727,9 @@ function LC2() {
     for (var i = 0; i < 9; i++) {
         LC_f21(i);
         LC_f22(i);
+    }
+    if (Step == 0) {
+        Steps.push("LC2();");
     }
 
 }
@@ -853,11 +741,11 @@ function DrawGridOnly() {
     //sudoku[0][2].ChangeState(2);
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
-            var id = "c";
+var id = "c";
             id += i.toString() + j.toString();
             var cell = document.getElementById(id);
             var state;
-            if (sudoku[i][j].GetState() == 0) state = "";
+            if(sudoku[i][j].GetState()==0) state = "";
             else state = sudoku[i][j].GetState();
             cell.innerHTML = "<td id=\"cell\"><input id =\"" + id + "9" + "\" class=\"full\" value=\"" + state + "\"maxlength=\"1\" size=\"1\"/></td>";
         }
@@ -866,17 +754,13 @@ function DrawGridOnly() {
 
 function changeBGToGreen(inner) {
     setTimeout(function () {
-        $(inner).velocity({
-            backgroundColor: "#22FF33"
-        }, 200);
+        $(inner).velocity({backgroundColor: "#22FF33"} , 200);
     }, 0);
 }
 
 function changeBGToWhite(inner) {
     setTimeout(function () {
-        $(inner).velocity({
-            backgroundColor: "#FFFFFF"
-        }, 300);
+        $(inner).velocity({backgroundColor: "#FFFFFF"} , 300);
     }, 750);
 }
 
@@ -992,10 +876,14 @@ function CheckBox(FilledX, FilledY) {
         //if(Step==0)Steps.push("CheckBox(" +  FilledX + ", " + FilledY + ");");;
         for (var i = a; i <= a + 2; i++) {
             for (var j = b; j <= b + 2; j++) {
+<<<<<<< HEAD
                 if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
                         {
                             Steps.push("CheckRow(" +  FilledX + ", " + FilledY + ");");
                         }
+=======
+
+>>>>>>> parent of 6400c62... Stashing...
                 sudoku[i][j].ChangePossibility(sudoku[FilledX][FilledY].GetState() - 1, false, i, j);
             }
         }
@@ -1008,10 +896,13 @@ function CheckColumn(c) {
             if (sudoku[j - 1][c - 1].GetState() == i) {
                 //if(Step==0)Steps.push("CheckColumn(" +  c + ");");;
                 for (var k = 0; k < 9; k++) {
+<<<<<<< HEAD
                     if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
                         {
                             Steps.push("CheckColumn(" +  c + ");");
                         }
+=======
+>>>>>>> parent of 6400c62... Stashing...
                     sudoku[k][c - 1].ChangePossibility(i - 1, false, k, c - 1);
                     //
                 }
@@ -1029,12 +920,15 @@ function CheckRow(r) {
             if (sudoku[r - 1][j - 1].GetState() == i) {
                 //if(Step==0)Steps.push("CheckRow(" +  r + ");");;
                 for (k = 0; k < 9; k++) {
+<<<<<<< HEAD
                     if(Step==0 && (sudoku[r-1][k].possibilities[i-1] && false))
                         {
                             Steps.push("CheckRow(" +  r + ");");
                         }
+=======
+>>>>>>> parent of 6400c62... Stashing...
                     sudoku[r - 1][k].ChangePossibility(i - 1, false, r - 1, k);
-                    //
+                    //Steps.push("CheckRow(" +  r + ");");
                 }
                 break;
             }
@@ -1199,8 +1093,13 @@ function AllHiddenSingles() {
             BoxHiddenSingles(i, j);
         }
     }
+<<<<<<< HEAD
     if (Step == 0);
     //Steps.push("AllHiddenSingles()");
+=======
+    if(Step==0);
+        //Steps.push("AllHiddenSingles()");
+>>>>>>> parent of 6400c62... Stashing...
 }
 
 function PuzzleCompleted() {
@@ -1213,13 +1112,21 @@ function PuzzleCompleted() {
     document.getElementById("Log").value += "\nPuzzle Completed! :)";
     var cnt = 0;
     for (var i = 1; i < Steps.length; i++) {
+<<<<<<< HEAD
         if (Steps[i - 1] == Steps[i] && cnt < 1) {
+=======
+        if (Steps[i - 1] == Steps[i] &&cnt<3 ) {
+>>>>>>> parent of 6400c62... Stashing...
 
             Steps.splice(i, 1);
             i--;
             cnt++;
         } else {
+<<<<<<< HEAD
             cnt = 0;
+=======
+            cnt=0;
+>>>>>>> parent of 6400c62... Stashing...
         }
     }
     Steps.push("AllHiddenSingles();AllHiddenSingles();");
@@ -1229,7 +1136,7 @@ function PuzzleCompleted() {
 }
 
 function resetPuzzle() {
-    sudoku = [];
+    sudoku=[];
     sudoku = [[new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
            [new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
            [new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0)],
@@ -2848,40 +2755,39 @@ function Everything() {
     resetPuzzle();
     if (GetPuz()) {
         CheckAll();
-        var p = 0;
+        var p=0;
         //DrawGrid();
-        for (var i = 0; p < 100; i++, p++) {
+        for (var i = 0; p<100; i++, p++) {
 
             AllHiddenSingles();
             CheckAll();
-            if (PuzzleCompleted()) break;
+            if(PuzzleCompleted())break;
             CheckAllSingles();
             CheckAll();
-            if (PuzzleCompleted()) break;
+            if(PuzzleCompleted())break;
             LC();
             CheckAll();
-            if (PuzzleCompleted()) break;
+if(PuzzleCompleted())break;
             LC2();
             CheckAll();
-            if (PuzzleCompleted()) break;
+if(PuzzleCompleted())break;
             NakedAll();
             CheckAll();
-            if (PuzzleCompleted()) break;
-            /*100007090
-            030020008
-            009600500
-            005400900
-            010080002
-            600004000
-            300000010
-            041000007
-            007000300*/
-            if (p == 10 || !PuzzleCompleted()) {
-                document.getElementById("Log").value = "\nPuzzle could not be solved";
-                DrawGrid();
-            } else {
-                DrawGrid();
-            }
+            if(PuzzleCompleted())break;
+/*100007090
+030020008
+009600500
+005400900
+010080002
+600004000
+300000010
+041000007
+007000300*/
+if(p==10||!PuzzleCompleted()){document.getElementById("Log").value="\nPuzzle could not be solved";
+        DrawGrid();
+    } else {
+        DrawGrid();
+    }
         }
     }
 }
