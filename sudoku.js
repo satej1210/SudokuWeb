@@ -877,13 +877,6 @@ function CheckBox(FilledX, FilledY) {
         for (var i = a; i <= a + 2; i++) {
             for (var j = b; j <= b + 2; j++) {
 
-                //if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
-                        {
-                            //Steps.push("CheckRow(" +  FilledX + ", " + FilledY + ");");
-                        }
-
-
-
                 sudoku[i][j].ChangePossibility(sudoku[FilledX][FilledY].GetState() - 1, false, i, j);
             }
         }
@@ -896,12 +889,6 @@ function CheckColumn(c) {
             if (sudoku[j - 1][c - 1].GetState() == i) {
                 //if(Step==0)Steps.push("CheckColumn(" +  c + ");");;
                 for (var k = 0; k < 9; k++) {
-
-                    //if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
-                        {
-                            //Steps.push("CheckColumn(" +  c + ");");
-                        }
-
                     sudoku[k][c - 1].ChangePossibility(i - 1, false, k, c - 1);
                     //
                 }
@@ -919,12 +906,6 @@ function CheckRow(r) {
             if (sudoku[r - 1][j - 1].GetState() == i) {
                 //if(Step==0)Steps.push("CheckRow(" +  r + ");");;
                 for (k = 0; k < 9; k++) {
-
-                   // if(Step==0 && (sudoku[r-1][k].possibilities[i-1] && false))
-                        {
-                         //   Steps.push("CheckRow(" +  r + ");");
-                        }
-
                     sudoku[r - 1][k].ChangePossibility(i - 1, false, r - 1, k);
                     //Steps.push("CheckRow(" +  r + ");");
                 }
@@ -1091,10 +1072,8 @@ function AllHiddenSingles() {
             BoxHiddenSingles(i, j);
         }
     }
-
-    if (Step == 0);
-    //Steps.push("AllHiddenSingles()");
-
+    if(Step==0);
+        //Steps.push("AllHiddenSingles()");
 }
 
 function PuzzleCompleted() {
@@ -1107,17 +1086,13 @@ function PuzzleCompleted() {
     document.getElementById("Log").value += "\nPuzzle Completed! :)";
     var cnt = 0;
     for (var i = 1; i < Steps.length; i++) {
-
-        if (Steps[i - 1] == Steps[i] && cnt < 1) {
-
+        if (Steps[i - 1] == Steps[i] &&cnt<3 ) {
 
             Steps.splice(i, 1);
             i--;
             cnt++;
         } else {
-
             cnt=0;
-
         }
     }
     Steps.push("AllHiddenSingles();AllHiddenSingles();");
