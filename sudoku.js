@@ -152,11 +152,7 @@ function StopSS() {
 
 function NextStep() {
 
-    if (Step==0)
-        {
-            eval(Steps[Step]);
-        Step++;
-        }
+
     if (Step > 0 && Step < Steps.length) {
         document.getElementById("Log").value += "\n---Step " + Step + "---";
         eval(Steps[Step]);
@@ -989,26 +985,24 @@ function CheckAllSingles() {
 }
 
 function CheckBox(FilledX, FilledY) {
-    var a, b, flag=0;
+    var a, b;
     a = parseInt((FilledX / 3)) * 3;
     b = parseInt((FilledY / 3)) * 3;
     if (sudoku[FilledX][FilledY].is_filled == true) {
         //if(Step==0)Steps.push("CheckBox(" +  FilledX + ", " + FilledY + ");");;
         for (var i = a; i <= a + 2; i++) {
             for (var j = b; j <= b + 2; j++) {
-                if(Step==0 && (sudoku[i][j].possibilities[sudoku[FilledX][FilledY].GetState() - 1] && false))
+                if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
                         {
-                            flag=1;//Steps.push("CheckBox(" +  FilledX + ", " + FilledY + ");");
+                            Steps.push("CheckRow(" +  FilledX + ", " + FilledY + ");");
                         }
                 sudoku[i][j].ChangePossibility(sudoku[FilledX][FilledY].GetState() - 1, false, i, j);
             }
         }
     }
-    return flag;
 }
 
 function CheckColumn(c) {
-    var flag=0;
     for (var i = 1; i <= 9; i++) {
         for (var j = 1; j <= 9; j++) {
             if (sudoku[j - 1][c - 1].GetState() == i) {
@@ -1016,8 +1010,7 @@ function CheckColumn(c) {
                 for (var k = 0; k < 9; k++) {
                     if(Step==0 && (sudoku[k][c - 1].possibilities[i-1] && false))
                         {
-                            flag=1;
-                            //Steps.push("CheckColumn(" +  c + ");");
+                            Steps.push("CheckColumn(" +  c + ");");
                         }
                     sudoku[k][c - 1].ChangePossibility(i - 1, false, k, c - 1);
                     //
@@ -1027,11 +1020,10 @@ function CheckColumn(c) {
         }
 
     }
-    return flag;
 }
 
 function CheckRow(r) {
-    var i, j, flag=0;
+    var i, j;
     for (i = 1; i <= 9; i++) {
         for (j = 1; j <= 9; j++) {
             if (sudoku[r - 1][j - 1].GetState() == i) {
@@ -1039,8 +1031,7 @@ function CheckRow(r) {
                 for (k = 0; k < 9; k++) {
                     if(Step==0 && (sudoku[r-1][k].possibilities[i-1] && false))
                         {
-                            flag=0;
-//                            Steps.push("CheckRow(" +  r + ");");
+                            Steps.push("CheckRow(" +  r + ");");
                         }
                     sudoku[r - 1][k].ChangePossibility(i - 1, false, r - 1, k);
                     //
@@ -1050,7 +1041,6 @@ function CheckRow(r) {
         }
 
     }
-    return flag;
 }
 
 function ReturnBoxPossibilities(x, i, j) {
@@ -1100,23 +1090,21 @@ function ReturnRowPossibilities(x, j) {
 }
 
 function CheckAll() {
-    var i, j, flag = 0;
+    var i, j;
     for (i = 1; i <= 9; i++) {
-        flag += CheckRow(i);
-        flag += CheckColumn(i);
+        CheckRow(i);
+        CheckColumn(i);
     }
 
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
-            flag += CheckBox(i, j);
+            CheckBox(i, j);
         }
     }
-    if(Step==0 && flag >0)
-        Steps.push("CheckAll();")
 }
 
 function BoxHiddenSingles(x, y) {
-    var flag = 0, flag1=0;
+    var flag = 0;
     var h = 0,
         l = 0;
     for (k = 1; k <= 9; k++) {
@@ -1134,21 +1122,17 @@ function BoxHiddenSingles(x, y) {
         if (flag == 1) {
             document.getElementById("Log").value += "\nBox Hidden Single found in box indices " + x + " " + y;
             if (Step == 0) {
-                flag1++;
-                //Steps.push("BoxHiddenSingles(" + x + ", " + y + ");");
+                Steps.push("BoxHiddenSingles(" + x + ", " + y + ");");
             }
             sudoku[l][h].ChangeState(k);
             CheckAll();
         }
     }
-    return flag1;
 }
 
 function RowHiddenSingles(i) {
     var no = 0;
     var flag = 0;
-    var flag1 = 0;
-
     for (var j = 1; j <= 9; j++) {
         flag = 0;
         for (var k = 0; k < 9; k++) {
@@ -1162,20 +1146,19 @@ function RowHiddenSingles(i) {
             document.getElementById("Log").value += "\nRow hidden single found in row " + i;
 
             if (Step == 0) {
-                //flag1++;
-                //Steps.push("RowHiddenSingles(" + i + ");");
+                Steps.push("RowHiddenSingles(" + i + ");");
             }
             sudoku[i][no].ChangeState(j);
             CheckAll();
         }
     }
 
-    return flag1;
+
 }
 
 function ColumnHiddenSingles(i) {
     var no = 0;
-var flag1 = 0;
+
     var flag = 0;
     for (var j = 1; j <= 9; j++) {
         flag = 0;
@@ -1190,35 +1173,34 @@ var flag1 = 0;
         }
         if (flag == 1) {
             if (Step == 0) {
-                //flag1++;
-                //Steps.push("ColumnHiddenSingles(" + i + ");");
+
+                Steps.push("ColumnHiddenSingles(" + i + ");");
             }
             document.getElementById("Log").value += "\nColumn Hidden Single found in column " + i;
             sudoku[no][i].ChangeState(j);
             CheckAll();
         }
     }
-return flag1;
+
 
 }
 
 function AllHiddenSingles() {
-    //var flag = 0;
     for (var i = 0; i < 9; i++) {
-        flag+=RowHiddenSingles(i);
+        RowHiddenSingles(i);
     }
 
 
     for (var i = 0; i < 9; i++) {
-        flag+=ColumnHiddenSingles(i);
+        ColumnHiddenSingles(i);
     }
     for (var i = 0; i < 9; i += 3) {
         for (var j = 0; j < 9; j += 3) {
-            flag+=BoxHiddenSingles(i, j);
+            BoxHiddenSingles(i, j);
         }
     }
-    if (Step == 0 && flag > 0)
-        Steps.push("AllHiddenSingles();");
+    if (Step == 0);
+    //Steps.push("AllHiddenSingles()");
 }
 
 function PuzzleCompleted() {
@@ -1230,16 +1212,16 @@ function PuzzleCompleted() {
     }
     document.getElementById("Log").value += "\nPuzzle Completed! :)";
     var cnt = 0;
-//    for (var i = 1; i < Steps.length; i++) {
-//        if (Steps[i - 1] == Steps[i] && cnt < 1) {
-//
-//            Steps.splice(i, 1);
-//            i--;
-//            cnt++;
-//        } else {
-//            cnt = 0;
-//        }
-//    }
+    for (var i = 1; i < Steps.length; i++) {
+        if (Steps[i - 1] == Steps[i] && cnt < 1) {
+
+            Steps.splice(i, 1);
+            i--;
+            cnt++;
+        } else {
+            cnt = 0;
+        }
+    }
     Steps.push("AllHiddenSingles();AllHiddenSingles();");
     DrawGrid();
     UpdateStepCNT(Steps.length);
@@ -2865,7 +2847,6 @@ function Everything() {
     //DrawGrid();
     resetPuzzle();
     if (GetPuz()) {
-        Steps.push("CheckAll();");
         CheckAll();
         var p = 0;
         //DrawGrid();
